@@ -7,7 +7,7 @@ items:
   spec:
     params:
     - name: url
-      value: index.docker.io/ibmcase/bluecompute-web
+      value: index.docker.io/marknieuwmans/bluecompute-web
     type: image
 - apiVersion: tekton.dev/v1alpha1
   kind: PipelineResource

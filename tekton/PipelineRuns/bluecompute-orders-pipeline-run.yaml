@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: bluecompute-orders-pr
+spec:
+  pipelineRef:
+    name: bluecompute-build-and-deploy-pipeline-orders
+  resources:
+    - name: git-source-orders
+      resourceRef:
+        name: git-source-orders
+    - name: docker-image-orders
+      resourceRef:
+        name: docker-image-orders
+  params:
+    - name: pathToYamlFile
+      value: "k8s_yamls"
+  serviceAccountName: pipeline-account
+  timeout: "1h0m0s"

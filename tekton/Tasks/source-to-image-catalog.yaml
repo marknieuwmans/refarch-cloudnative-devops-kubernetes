@@ -40,9 +40,9 @@ spec:
         NEW_IMAGE_ID="$(resources.inputs.docker-image-catalog.url):$SHORT_GIT_HASH"
         echo "SHORT_GIT_HASH = $SHORT_GIT_HASH"
         echo "Building Image $NEW_IMAGE_ID"
-        buildah bud --tls-verify="$(params.TLSVERIFY)" --layers -f "$(params.DOCKERFILE)" -t "$NEW_IMAGE_ID" "$(params.CONTEXT)"
+        buildah bud --tls-verify="$(params.TLSVERIFY)" --storage-driver=vfs --layers -f "$(params.DOCKERFILE)" -t "$NEW_IMAGE_ID" "$(params.CONTEXT)"
         echo "Pushing Image $NEW_IMAGE_ID"
-        buildah push --tls-verify="$(params.TLSVERIFY)" "$NEW_IMAGE_ID" "docker://$NEW_IMAGE_ID"
+        buildah push --tls-verify="$(params.TLSVERIFY)" --storage-driver=vfs "$NEW_IMAGE_ID" "docker://$NEW_IMAGE_ID"
         echo "NEW_IMAGE_ID=$NEW_IMAGE_ID" >> /workspace/env-config
     securityContext:
       privileged: true
